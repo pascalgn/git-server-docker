@@ -6,9 +6,19 @@ Serves a single git repository via HTTP without any authentication.
 
 ## Usage
 
-```
+Docker:
+
+```sh
 docker run -p 3000:3000 pascalgn/git-server-docker
 git clone http://localhost:3000/repository.git
+```
+
+Kubernetes:
+
+```sh
+kubectl create -f https://raw.githubusercontent.com/pascalgn/git-server-docker/master/kubernetes.yaml
+PORT=$(kubectl get service/git-server -o jsonpath={.spec.ports[0].nodePort})
+git clone http://localhost:${PORT}/repository.git
 ```
 
 ## Acknowledgements
